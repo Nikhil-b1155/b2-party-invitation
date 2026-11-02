@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="de" translate="no">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="theme-color" content="#17152d" />
+  <meta name="google" content="notranslate" />
+  <meta name="description" content="Eine kleine Einladung zu unserer B2-Abschlussfeier." />
+  <title>Eine kleine Einladung</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Playfair+Display:wght@600;700&display=swap');
+    :root { --cream:#fff8ed; --gold:#ffd88a; --pink:#ff8eaa; --ink:#211c3c; }
+    * { box-sizing: border-box; }
+    body {
+      margin:0; min-height:100svh; overflow:hidden; display:grid; place-items:center;
+      padding:24px; color:var(--cream); font-family:'DM Sans',system-ui,sans-serif;
+      background:
+        radial-gradient(ellipse at 15% 20%, rgba(151,93,183,.38), transparent 35%),
+        radial-gradient(ellipse at 85% 78%, rgba(230,116,143,.25), transparent 35%),
+        linear-gradient(135deg,#111329 0%,#292044 52%,#402747 100%);
+    }
+    body::before, body::after { content:""; position:fixed; inset:0; pointer-events:none; }
+    body::before {
+      opacity:.5; background-image:radial-gradient(2px 2px at 20% 30%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 70% 20%,#fff 50%,transparent 60%),radial-gradient(2px 2px at 85% 65%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 35% 80%,#fff 50%,transparent 60%),radial-gradient(1px 1px at 55% 48%,#fff 50%,transparent 60%); background-size:260px 220px;
+    }
+    body::after { background:linear-gradient(transparent 65%,rgba(10,8,25,.25)); }
+    .sparkle { position:fixed; color:#ffdf9b; opacity:.7; animation:twinkle 3s ease-in-out infinite; pointer-events:none; }
+    .s1{top:12%;left:12%;font-size:22px}.s2{top:19%;right:13%;font-size:17px;animation-delay:1s}.s3{bottom:15%;left:17%;font-size:18px;animation-delay:1.7s}.s4{bottom:20%;right:12%;font-size:24px;animation-delay:.5s}
+    @keyframes twinkle { 0%,100%{transform:scale(.75) rotate(0);opacity:.35} 50%{transform:scale(1.2) rotate(25deg);opacity:1} }
+    .card {
+      width:min(100%,480px); position:relative; z-index:2; text-align:center; padding:clamp(30px,7vw,52px) clamp(22px,6vw,42px);
+      border:1px solid rgba(255,255,255,.2); border-radius:28px;
+      background:linear-gradient(145deg,rgba(255,255,255,.15),rgba(255,255,255,.07));
+      box-shadow:0 28px 90px rgba(0,0,0,.38),inset 0 1px 0 rgba(255,255,255,.16);
+      backdrop-filter:blur(18px); -webkit-backdrop-filter:blur(18px);
+      animation:appear .8s cubic-bezier(.2,.8,.2,1) both;
+    }
+    @keyframes appear { from{opacity:0;transform:translateY(18px) scale(.97)} to{opacity:1;transform:none} }
+    .eyebrow { display:inline-flex;align-items:center;gap:8px;padding:8px 13px;border-radius:99px;border:1px solid rgba(255,216,138,.35);background:rgba(255,216,138,.09);color:var(--gold);font-size:11px;font-weight:800;letter-spacing:2px;text-transform:uppercase; }
+    .icon { font-size:54px; margin:22px 0 12px; filter:drop-shadow(0 7px 18px rgba(255,190,115,.25)); }
+    h1 { margin:0 auto 14px; max-width:370px; font:700 clamp(29px,7vw,39px)/1.16 'Playfair Display',Georgia,serif; letter-spacing:-.5px; }
+    .sub { margin:0 auto; max-width:340px; color:rgba(255,248,237,.78); font-size:15px; line-height:1.75; }
+    .rule { width:48px;height:2px;margin:24px auto;background:linear-gradient(90deg,transparent,var(--gold),transparent); }
+    .question { font-size:16px;font-weight:700;margin:0 0 22px;color:#fff3dc; }
+    .buttons { min-height:58px;display:flex;justify-content:center;align-items:center;gap:14px;position:relative; }
+    button { border:0;border-radius:14px;padding:14px 28px;font:800 15px 'DM Sans',sans-serif;cursor:pointer;touch-action:manipulation;transition:transform .18s,box-shadow .18s,background .18s; }
+    #yes { color:#35213a;background:linear-gradient(135deg,#ffe5a9,#ffc978);box-shadow:0 8px 24px rgba(255,197,112,.24);min-width:120px; }
+    #yes:hover { transform:translateY(-3px) scale(1.04);box-shadow:0 12px 30px rgba(255,197,112,.4); }
+    #no { color:white;background:rgba(255,255,255,.12);border:1px solid rgba(255,255,255,.23);min-width:120px;position:relative; }
+    .hint { min-height:20px;margin:18px 0 0;color:rgba(255,248,237,.52);font-size:12px; }
+    .footer { margin-top:27px;color:rgba(255,255,255,.42);font-size:11px;letter-spacing:1.2px;text-transform:uppercase; }
+    #success { display:none; }
+    #success .icon { font-size:65px; }
+    #success h2 { font:700 clamp(31px,7vw,40px)/1.2 'Playfair Display',Georgia,serif;margin:0 0 14px;color:#ffe2a7; }
+    #success p { color:rgba(255,248,237,.88);font-size:16px;line-height:1.8;margin:0 auto;max-width:350px; }
+    .signature { margin-top:24px!important;color:var(--gold)!important;font-weight:700;font-size:14px!important; }
+    .confetti { position:fixed;top:-15px;width:9px;height:13px;z-index:5;pointer-events:none;animation:fall linear forwards; }
+    @keyframes fall { to { transform:translate3d(var(--drift),110svh,0) rotate(760deg);opacity:.85; } }
+    @media(max-width:390px){.card{padding:28px 19px}.buttons{gap:9px}button{padding:13px 22px;min-width:108px!important}}
+    @media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}}
+  </style>
+</head>
+<body>
+  <span class="sparkle s1">✦</span><span class="sparkle s2">✧</span><span class="sparkle s3">✧</span><span class="sparkle s4">✦</span>
+  <main class="card" aria-live="polite">
+    <section id="question-screen">
+      <div class="eyebrow">✦ Eine kleine Einladung ✦</div>
+      <div class="icon">🥂</div>
+      <h1>Wollen wir zusammen eine Party machen?</h1>
+      <div class="rule"></div>
+      <p class="question">Kommst du mit?</p>
+      <div class="buttons" id="button-area">
+        <button id="yes" type="button">Ja</button>
+        <button id="no" type="button">Nein</button>
+      </div>
+      <p class="hint" id="hint">Überleg es dir gut…</p>
+      <div class="footer">Gute Freunde · Gute Zeiten · Gute Erinnerungen</div>
+    </section>
+    <section id="success">
+      <div class="eyebrow">✦ Das wird schön! ✦</div>
+      <div class="icon">🎉🥂✨</div>
+      <h2>Juhuuu! Das ist toll!</h2>
+      <p>Super! Dann feiern wir zusammen, sobald unser B2-Kurs vorbei ist!</p>
+      <p class="signature">Ich freue mich schon!</p>
+    </section>
+  </main>
+  <script>
+    const noBtn = document.getElementById('no');
+    const yesBtn = document.getElementById('yes');
+    const question = document.getElementById('question-screen');
+    const success = document.getElementById('success');
+    const hint = document.getElementById('hint');
+    let dodgeCount = 0;
+    let moved = false;
+
+    function dodge() {
+      if (success.style.display === 'block') return;
+
+      // Use the visible viewport and clamp every position so the button
+      // can never jump beyond the screen edges (also on mobile).
+      const margin = 14;
+      const rect = noBtn.getBoundingClientRect();
+      const viewportWidth = document.documentElement.clientWidth;
+      const viewportHeight = document.documentElement.clientHeight;
+      const maxX = Math.max(margin, viewportWidth - rect.width - margin);
+      const maxY = Math.max(margin, viewportHeight - rect.height - margin);
+
+      const currentX = Math.min(Math.max(rect.left, margin), maxX);
+      const currentY = Math.min(Math.max(rect.top, margin), maxY);
+
+      let x = currentX;
+      let y = currentY;
+      for (let tries = 0; tries < 30; tries++) {
+        x = margin + Math.random() * Math.max(0, maxX - margin);
+        y = margin + Math.random() * Math.max(0, maxY - margin);
+        if (Math.hypot(x - currentX, y - currentY) > 110) break;
+      }
+
+      x = Math.min(Math.max(x, margin), maxX);
+      y = Math.min(Math.max(y, margin), maxY);
+
+      noBtn.style.position = 'fixed';
+      noBtn.style.left = `${x}px`;
+      noBtn.style.top = `${y}px`;
+      noBtn.style.zIndex = '10';
+      moved = true;
+      dodgeCount++;
+      hint.textContent = dodgeCount > 2
+        ? 'Diese Antwort ist wohl nicht erlaubt!'
+        : 'Ups! Versuch es noch einmal!';
+    }
+    noBtn.addEventListener('pointerenter', (event) => { if (event.pointerType === 'mouse') dodge(); });
+    noBtn.addEventListener('touchstart', (event) => { event.preventDefault(); dodge(); }, {passive:false});
+    noBtn.addEventListener('click', (event) => { event.preventDefault(); dodge(); });
+    function keepNoButtonOnScreen() {
+      if (!moved || success.style.display === 'block') return;
+      const r = noBtn.getBoundingClientRect();
+      const margin = 14;
+      const maxX = Math.max(margin, document.documentElement.clientWidth - r.width - margin);
+      const maxY = Math.max(margin, document.documentElement.clientHeight - r.height - margin);
+      noBtn.style.left = `${Math.min(Math.max(r.left, margin), maxX)}px`;
+      noBtn.style.top = `${Math.min(Math.max(r.top, margin), maxY)}px`;
+    }
+    window.addEventListener('resize', keepNoButtonOnScreen);
+    window.addEventListener('orientationchange', keepNoButtonOnScreen);
+    function celebrate() {
+      question.style.display = 'none';
+      noBtn.style.display = 'none';
+      success.style.display = 'block';
+      for (let i=0; i<95; i++) {
+        const bit = document.createElement('i');
+        bit.className = 'confetti';
+        bit.style.left = `${Math.random()*100}vw`;
+        bit.style.background = ['#ffd88a','#ff8eaa','#b9a3ff','#fff3dc','#9be3c2'][Math.floor(Math.random()*5)];
+        bit.style.borderRadius = Math.random() > .5 ? '50%' : '2px';
+        bit.style.setProperty('--drift', `${(Math.random()-.5)*240}px`);
+        bit.style.animationDuration = `${2.5+Math.random()*3}s`;
+        bit.style.animationDelay = `${Math.random()*.8}s`;
+        document.body.appendChild(bit);
+        setTimeout(() => bit.remove(), 6500);
+      }
+    }
+    yesBtn.addEventListener('click', celebrate);
+  </script>
+</body>
+</html>
